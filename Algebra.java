@@ -46,7 +46,7 @@ public class Algebra {
 		int sum = 0;
 		for (int i = 0; i < x2; i++){
 			sum = plus(sum, x1);
-		}
+		}	
 		return sum;
 	}
 
@@ -61,6 +61,10 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
+		if (x2 == 0) {
+			System.out.println("Error: cannot divide by zero");
+			return 0;
+		}
 		int sum = x2;
 		int counter = 0;
 		while (sum <= x1) {
@@ -72,10 +76,13 @@ public class Algebra {
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
+		if (x2 == 0) {
+        	System.out.println("Error: cannot mod by zero");
+        	return 0;
+    	}
 		int div = div(x1, x2);
 		int multi = times(div, x2);
-		int mod = minus(x1, multi);
-		return mod;
+		return minus(x1, multi);
 	}	
 
 	// Returns the integer part of sqrt(x) 
