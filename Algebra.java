@@ -26,8 +26,14 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int sum = x1;
-		for (int i = 0; i < x2; i++){
-			sum ++;
+		if (x2 > 0) {
+			for (int i = 0; i < x2; i++) {
+				sum++;
+			}
+		} else {
+			for (int i = 0; i < -x2; i++) {
+				sum--;
+			}
 		}
 		return sum;
 	}
@@ -35,8 +41,14 @@ public class Algebra {
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int sum = x1;
-		for (int i = 0; i < x2; i++){
+		if (x2 > 0) {
+			for (int i = 0; i < x2; i++){
 			sum --;
+			}
+		} else {
+			for (int i = 0; i < -x2; i++) {
+				sum++;
+			}
 		}
 		return sum;
 	}
@@ -44,9 +56,17 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int sum = 0;
+		boolean negative = false;
+		if (x2 < 0) {
+			negative = true;
+			x2 = -x2;
+		}
 		for (int i = 0; i < x2; i++){
 			sum = plus(sum, x1);
-		}	
+		}
+		if (negative) {
+			sum = minus(0, sum);
+		}
 		return sum;
 	}
 
@@ -76,10 +96,6 @@ public class Algebra {
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		if (x2 == 0) {
-        	System.out.println("Error: cannot mod by zero");
-        	return 0;
-    	}
 		int div = div(x1, x2);
 		int multi = times(div, x2);
 		return minus(x1, multi);
