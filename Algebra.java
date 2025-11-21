@@ -82,20 +82,36 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		if (x2 == 0) {
-			System.out.println("Error: cannot divide by zero");
 			return 0;
 		}
-		int sum = x2;
+		boolean negative = false;
+		if (x1 < 0 && x2 > 0) {
+			negative = true;
+			x1 = minus(0, x1);
+		} else if (x1 > 0 && x2 < 0) {
+			negative = true;
+			x2 = minus(0, x2);
+		} else if (x1 < 0 && x1 < 0) {
+			x1 = minus(0, x1);
+			x2 = minus(0, x2);
+		}
 		int counter = 0;
+		int sum = x2;
 		while (sum <= x1) {
 			sum = plus(sum, x2);
 			counter++;
+		}
+		if (negative) {
+			counter = minus(0, counter);
 		}
 		return counter;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
+		if (x2 == 0) {
+			return 0;
+		}
 		int div = div(x1, x2);
 		int multi = times(div, x2);
 		return minus(x1, multi);
